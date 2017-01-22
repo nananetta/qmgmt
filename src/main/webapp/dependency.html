@@ -1,0 +1,23 @@
+<div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage" ng-controller="DependencyCtrl as ctrl">
+
+	<md-content id="refdata-control" md-theme="docs-dark" layout-gt-sm="row" sticky>
+		<form class="form-inline">
+			<div class="form-group">
+				<md-input-container id="namespace">
+					<label>Namespace</label>
+					<input ng-model="namespace"> 
+				</md-input-container>
+			</div>
+			<div class="form-group">
+				<md-button class="md-raised md-primary" ng-click="reload()">Load</md-button>
+				<md-button class="md-raised" ng-click="clear()">Clear</md-button>
+			</div>
+		</form>
+	</md-content>
+	.
+	<div>
+		<div data-angular-treeview="true" data-tree-model="refList" data-node-id="name" data-node-label="name"
+			data-node-children="referencedBy"></div>
+	</div>
+	s
+</div>

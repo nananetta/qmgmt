@@ -1,0 +1,234 @@
+<html>
+<head>
+<script type="text/javascript" src="js/angular-1.5.5.js"></script>
+<script type="text/javascript" src="js/angular-animate.min-1.5.5.js"></script>
+<script type="text/javascript" src="js/angular-route.min-1.5.5.js"></script>
+<script type="text/javascript" src="js/angular-aria.min-1.5.5.js"></script>
+<script type="text/javascript" src="js/angular-messages.min-1.5.5.js"></script>
+<script type="text/javascript" src="js/svg-assets-cache-114.js"></script>
+<script type="text/javascript" src="js/angular-material-v1.1.1.js"></script>
+<script type="text/javascript" src="js/ng-table.min.js"></script>
+<script type="text/javascript" src="js/angular_ngreource.js"></script>
+<script type="text/javascript" src="js/loading-bar.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/sessionctrl.js"></script>
+<script type="text/javascript" src="js/qmanagerctrl.js"></script>
+<script type="text/javascript" src="js/qviewerctrl.js"></script>
+
+<link href="css/angular-material-v1.1.1.css" rel="stylesheet"></link>
+<link href="css/ng-table.min.css" rel="stylesheet"></link>
+<link href="css/bootstrap.min.css" rel="stylesheet"></link>
+<link href="css/docs-1.1.0-rc.5.css" rel="stylesheet"></link>
+<link href="css/app.css" rel="stylesheet"></link>
+<link href="css/loading-bar.min.css" rel="stylesheet"></link>
+<link href="css/angular.treeview.css" rel="stylesheet"></link>
+</head>
+<body>
+	<div ng-cloak="" ng-app="MyApp">
+		<md-content> 
+			<md-toolbar class="md-hue-2" ng-controller="SessionCtrl" >
+			<div class="md-toolbar-tools">
+				<img src="img/mwa-logo.jpg" height="50">
+				<h2>
+					<span>ระบบจัดการคิวบริการหาท่อรั่ว</span>
+				</h2>
+				<span flex=""></span>
+				<md-button>ออกจากระบบ</md-button>
+			</div>
+			</md-toolbar> 
+		</md-content>
+						
+		<md-content class="md-padding" layout="row" ng-controller="QManagerCtrl as qmgr" >
+						<script type="text/ng-template" id="inputDialog.tmpl.html">
+<md-dialog>
+
+<md-content class="md-padding" layout="row">
+					<md-whiteframe class="md-whiteframe-2dp" class="md-padding" flex="">
+						<md-toolbar md-scroll-shrink ng-if="true">
+							<div class="md-toolbar-tools">
+								<h3>
+									<span>จ่ายคิว</span>
+								</h3>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="dc.cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+							</div>
+						</md-toolbar>
+<md-dialog-content>
+							<form name="userForm">
+								<p></p>
+								<div layout-gt-sm="row">
+									<md-input-container class="md-block">
+										<label>เลขทะเบียนผู้ใช้น้ำ</label>
+										<input ng-model="dc.accountNo">
+									</md-input-container>
+									<md-input-container class="md-block">
+										<label>เลขที่คำร้อง</label> 
+										<input ng-model="dc.petitionNo">
+									</md-input-container>
+								</div>
+								<div layout-gt-sm="row">
+									<md-input-container class="md-block">
+										<label>ช่วงเวลาที่นัด</label> 
+										<input ng-model="dc.reservedWeek">
+									</md-input-container>
+								</div>
+								<div layout-gt-sm="row">
+									<md-input-container class="md-block">
+										<label>สาขา</label>
+										<md-select ng-model="dc.branchId">
+										<md-option ng-repeat="branch in dc.branches" value="{{branch.branchId}}">
+										{{branch.branchDesc}} </md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-click="dc.answer('save')">บันทึก</md-button>
+      <md-button ng-click="dc.cancel()">
+       ยกเลิก
+      </md-button>
+    </md-dialog-actions>
+					</whiteframe>
+					</md-content>
+
+</md-dialog>
+</script>
+			<md-whiteframe class="md-whiteframe-2dp" class="md-padding" flex="">
+				<md-toolbar md-scroll-shrink ng-if="true">
+					<div class="md-toolbar-tools">
+						<h3>
+							<span>จัดการคิว</span>
+						</h3>
+					</div>
+				</md-toolbar>
+				<div layout="row">
+					<md-input-container>
+						<label>สาขา</label>
+							<md-select ng-model="qmgr.branchId">
+								<md-option ng-repeat="branch in qmgr.branches" value="{{branch.branchId}}">
+									{{branch.branchDesc}} </md-option>
+							</md-select>
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>ช่วงเวลาที่นัด</label> 
+						<input ng-model="qmgr.reservedWeek">
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>accountNo</label> 
+						<input ng-model="qmgr.accountNo">
+					</md-input-container>
+				</div>
+				<div layout="row" layout-xs="column">
+					<md-card flex-gt-sm="25">
+						<md-card-title>
+						  <md-card-title-text>
+						    <span class="md-headline">1 ม.ค. - 7 ม.ค. 2560</span>
+						    <span class="md-subhead">03 - สาขาทุ่งมหาเมฆ</span>
+						  </md-card-title-text>
+						    <div class="md-media-sm card-media">ว่าง</div>
+						</md-card-title>
+						<md-card-actions layout="row" layout-align="end center">
+						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event)">จองคิว</md-button>
+						</md-card-actions>
+					</md-card>
+					
+					<md-card flex-gt-sm="25">
+						<md-card-title>
+						  <md-card-title-text>
+						    <span class="md-headline">8 ม.ค. - 14 ม.ค. 2560</span>
+						    <span class="md-subhead">03 - สาขาทุ่งมหาเมฆ</span>
+						  </md-card-title-text>
+						    <div class="md-media-sm card-media">ว่าง</div>
+						</md-card-title>
+						<md-card-actions layout="row" layout-align="end center">
+						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event)">จองคิว</md-button>
+						</md-card-actions>
+					</md-card>
+
+					<md-card flex-gt-sm="25">
+						<md-card-title>
+						  <md-card-title-text>
+						    <span class="md-headline">15 ม.ค. - 21 ม.ค. 2560</span>
+						    <span class="md-subhead">03 - สาขาทุ่งมหาเมฆ</span>
+						  </md-card-title-text>
+						    <div class="md-media-sm card-media">ว่าง</div>
+						</md-card-title>
+						<md-card-actions layout="row" layout-align="end center">
+						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event)">จองคิว</md-button>
+						</md-card-actions>
+					</md-card>
+
+					<md-card flex-gt-sm="25">
+						<md-card-title>
+						  <md-card-title-text>
+						    <span class="md-headline">22 ม.ค. - 28 ม.ค. 2560</span>
+						    <span class="md-subhead">03 - สาขาทุ่งมหาเมฆ</span>
+						  </md-card-title-text>
+						    <div class="md-media-sm card-media">ว่าง</div>
+						</md-card-title>
+						<md-card-actions layout="row" layout-align="end center">
+						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event)">จองคิว</md-button>
+						</md-card-actions>
+					</md-card>
+			    </div>
+
+			</whiteframe>
+		</md-content>
+
+		<md-content class="md-padding" layout="row" ng-controller="QViewerCtrl as allq" >
+			<md-whiteframe class="md-whiteframe-2dp" class="md-padding" flex="">
+				<md-toolbar md-scroll-shrink ng-if="true">
+					<div class="md-toolbar-tools">
+						<h3>
+							<span>ตรวจสอบคิว</span>
+						</h3>
+					</div>
+				</md-toolbar>
+				<div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
+					<form class="form-inline">
+						<div class="form-group">
+							<md-input-container>
+								<label>สาขา</label>
+								<md-select ng-model="allq.branchId">
+									<md-option ng-repeat="branch in allq.branches" value="{{branch.branchId}}">
+									{{branch.branchDesc}} </md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+						<div class="form-group">
+							<md-input-container> <label>สัปดาห์</label>
+								<md-select ng-model="allq.weekId">
+								<md-option> <em>None</em></md-option>
+								<md-option ng-repeat="week in allq.weeks" ng-value="{{week.weekId}}"> {{week.weekDesc}} </md-option> 
+								</md-select>
+							</md-input-container>
+						</div>
+						<div class="form-group">
+							<md-button id="search-button" class="md-raised md-primary">ค้นหา</md-button>
+						</div>
+					</form>
+					<div>
+						<table ng-table="allq.tableParams"
+							class="table table-condensed table-bordered table-striped table-hover">
+							<tr style="font-size: 80%" " ng-repeat="row in $data">
+								<td data-title="'เลขทะเบียนผู้ใช้น้ำ'" sortable="'accountNo'">
+									{{row.accountNo}}</td>
+								<td data-title="'เลขที่คำร้อง'"
+									sortable="'petitionNo'">{{row.petitionNo}}</td>
+								<td data-title="'วันที่รับคำร้อง'" 
+									sortable="'petitionDate'">{{row.petitionDate}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</md-whiteframe>
+		</md-content>
+	</div>
+</body>
+
+</html>
