@@ -3,7 +3,7 @@ app = angular.module('MyApp', [ 'ngMaterial', 'ngMessages', 'ngRoute',
 		'ngAnimate', 'angular-loading-bar' ]);
 
 app.factory('branchFactory', [ '$resource', function($resource) {
-    return $resource('/rest/admin/devtools/services/branches', {}, {
+    return $resource('/qmgmt/master/branch/getAll', {}, {
 	get : {
 	    method : 'GET',
 	    headers : {
@@ -15,7 +15,7 @@ app.factory('branchFactory', [ '$resource', function($resource) {
 } ]);
 
 app.factory('weekFactory', [ '$resource', function($resource) {
-    return $resource('/rest/admin/devtools/services/weeks', {}, {
+    return $resource('/qmgmt/week/getAll', {}, {
 	get : {
 	    method : 'GET',
 	    headers : {
