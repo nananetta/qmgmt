@@ -127,7 +127,7 @@
 				</div>
 				<div class="col-md-6 text-right">
 					<p style="color: gray; padding-top: 5px; padding-bottom: 5px; margin-bottom: 0px">
-						<span>__Release 1.0.0 - 2017-01-28T11:26:47Z__</span>
+						<span>__Release 1.0.0 - 2017-01-29T04:47:58Z__</span>
 					</p>
 				</div>
 			</div>

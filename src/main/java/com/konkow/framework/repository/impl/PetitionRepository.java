@@ -46,19 +46,11 @@ public class PetitionRepository extends AbstractRepository<Petition, Long> imple
 
 	public Result<Petition> findByQuery(PetitionQuery query) {
 		Criteria criteria = createCriteria(Petition.class);
-		if (query.getBranchId() != null && query.getBranchId().length() > 0) {
-			criteria = criteria.add(Restrictions.eq("branch.id", Integer.parseInt(query.getBranchId())));
+		if (query.getBranchId() != null) {
+			criteria = criteria.add(Restrictions.eq("branch.id", query.getBranchId()));
 		}
-		if (query.getWeekId() != null && query.getWeekId().length() > 0) {
-			criteria = criteria.add(Restrictions.eq("week.id", Integer.parseInt(query.getWeekId())));
-		}
-		return new HibernateResult<Petition>(sessionFactory, criteria);
-	}
-	
-	public Result<Petition> findByAvailableWeekQuery(PetitionQuery query) {
-		Criteria criteria = createCriteria(Petition.class);
-		if (query.getBranchId() != null && query.getBranchId().length() > 0) {
-			criteria = criteria.add(Restrictions.eq("branch.id", Integer.parseInt(query.getBranchId())));
+		if (query.getWeekId() != null) {
+			criteria = criteria.add(Restrictions.eq("week.id", query.getWeekId()));
 		}
 		return new HibernateResult<Petition>(sessionFactory, criteria);
 	}

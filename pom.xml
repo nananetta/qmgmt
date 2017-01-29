@@ -20,7 +20,7 @@
         <web.context>/qmgmt</web.context>
 
         <!-- Project Configuration Properties -->
-        <default.page.size>2</default.page.size>
+        <default.page.size>10</default.page.size>
         
         <!-- Build Properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

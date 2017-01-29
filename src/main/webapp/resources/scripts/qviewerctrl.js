@@ -1,21 +1,9 @@
 var app = angular.module('MyApp');
 
-app.factory('allq', [ '$resource', function($resource) {
-    return $resource('/qmgmt/petition/getAll', {}, {
-	get : {
-	    method : 'GET',
-	    headers : {
-		'Accept' : 'application/json',
-		'Content-Type' : 'application/json'
-	    }
-	}
-    });
-} ])
-
 app.factory('qsearch', [ '$resource', function($resource) {
-    return $resource('/qmgmt/petition/search', {weekId: '@_weekId'}, {
-	get : {
-	    method : 'GET',
+    return $resource('/qmgmt/petition/search', {}, {
+	post : {
+	    method : 'POST',
 	    headers : {
 		'Accept' : 'application/json',
 		'Content-Type' : 'application/json'
@@ -27,45 +15,63 @@ app.factory('qsearch', [ '$resource', function($resource) {
 app.run(configureDefaults);
   configureDefaults.$inject = ["ngTableDefaults"];
 
+  function configureDefaults(ngTableDefaults) {
+    ngTableDefaults.params.count = 10;
+    ngTableDefaults.settings.counts = [];
+  };
+  
+
   
   
-app.controller('QViewerCtrl', function ($scope, allq, qsearch, NgTableParams, branchFactory, weekFactory) {
+app.controller('QViewerCtrl', function ($scope, $mdDialog, qsearch, NgTableParams, branchFactory, weekFactory) {
 	var self = this;
 	self.result = [];
 	self.weeks = [];
 	self.branches = [];
-	self.branchId = "";
-	self.weekId = "";
+	self.branchId = undefined;
+	self.weekId = undefined;
     self.tableParams = new NgTableParams({}, {
     	dataset: this.result
     });
     
-//	branchFactory.get().$promise.then(function(result) {
-//		self.branches = result.list;
-//	}, function(error) {
-//		console.log("error getting branchFactory");
-//	});
-//    
-//    weekFactory.get().$promise.then(function(result) {
-//    	self.weeks = result.list;
-//	}, function(error) {
-//		console.log("error getting weekFactory");
-//	});
+	branchFactory.get().$promise.then(function(result) {
+		self.branches = result.list;
+	}, function(error) {
+		console.log("error getting branchFactory");
+	});
+    
+    weekFactory.get().$promise.then(function(result) {
+    	self.weeks = result.list;
+	}, function(error) {
+		console.log("error getting weekFactory");
+	});
 
-//    qsearch.get({weekId: self.weekId}).$promise.then(function(result) {
-//    	self.result = result.list.map(function(item){
-//			item.status = item.isAvailable?"ว่าง":"เต็ม";
-//			item.status.labelclass = item.availability?"label label-success":"label label-warning";
-//			return item;
-//	    });
-//		$scope.tableParams = new NgTableParams({}, { dataset:$scope.allq  });
-//		
-//		self.tableParams.settings({
-//	        dataset: self.result
-//	      });
-//	}, function(error) {
-//		
-//	});
+    
+    self.search = function(ev) {
+    	
+    	if(self.branchId == undefined || self.weekId == undefined) {
+    	    $mdDialog.show(
+    	      $mdDialog.alert()
+    	        .parent(angular.element(document.querySelector('#popupContainer')))
+    	        .clickOutsideToClose(true)
+    	        .title('กรุณาระบุสาขา และสัปดาห์')
+    	        .ok('ตกลง')
+    	        .targetEvent(ev)
+    	    );
+      	  return;
+    	};
+    	qsearch.post({weekId: self.weekId, branchId: self.branchId}).$promise.then(function(result) {
+        	self.result = result.list;
+    		$scope.tableParams = new NgTableParams({}, { dataset:self.result  });
+    		
+    		self.tableParams.settings({
+    	        dataset: self.result
+    	      });
+    	}, function(error) {
+    		
+    	});
+    };
+
 
 });
 

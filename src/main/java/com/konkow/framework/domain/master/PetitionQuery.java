@@ -4,28 +4,20 @@ import com.konkow.framework.domain.AbstractQuery;
 
 public class PetitionQuery extends AbstractQuery {
 
-    private String weekId;
-    private String branchId;
-    private boolean isAvailable;
+    private Integer weekId;
+    private Integer branchId;
     
-	public String getWeekId() {
+	public Integer getWeekId() {
 		return weekId;
 	}
-	public void setWeekId(String weekId) {
+	public void setWeekId(Integer weekId) {
 		this.weekId = weekId;
 	}
-	public String getBranchId() {
+	public Integer getBranchId() {
 		return branchId;
 	}
-	public void setBranchId(String branchId) {
+	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
 	}
-	public boolean isAvailable() {
-		return isAvailable;
-	}
-	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
-	}
-	
 
 }

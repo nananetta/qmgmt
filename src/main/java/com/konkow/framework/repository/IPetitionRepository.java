@@ -17,6 +17,4 @@ public interface IPetitionRepository extends Repository<Petition, Long> {
 	
 	public Result<Petition> findByQuery(PetitionQuery query);
 	
-	public Result<Petition> findByAvailableWeekQuery(PetitionQuery query);
-
 }

@@ -21,7 +21,7 @@
 		<tiles:insertAttribute name="body"></tiles:insertAttribute>
 	</div>
 	<div class="col-md-offset-6">
-		<p style="color: white">__Release 1.0.0 - 2017-01-28T11:26:47Z__</p>
+		<p style="color: white">__Release 1.0.0 - 2017-01-29T04:47:58Z__</p>
 	</div>
 </body>
 </html>

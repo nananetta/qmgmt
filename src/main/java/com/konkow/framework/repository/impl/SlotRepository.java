@@ -28,7 +28,7 @@ public class SlotRepository implements ISlotRepository {
         return sessionFactory.getCurrentSession();
     }
 	
-	public List<Slot> findAvailableWeekByBranchId(Integer branchId, Integer page, Integer pageSize, Integer maxPetitionPerday) {
+	public List<Slot> findAvailableWeekByBranchId(Integer branchId, Integer page, Integer pageSize, Integer maxPetitionPerdayLow, Integer maxPetitionPerdayHigh, Integer lowWorkDayThreshold) {
 		
 		if(page==null || page < 0) {
 			page = 0;
@@ -50,11 +50,18 @@ public class SlotRepository implements ISlotRepository {
 			slot.setWeekText(row[1].toString());
 			slot.setNoOfWorkday(Integer.parseInt(row[2].toString()));
 			int numCount = Integer.parseInt(row[3].toString());
+			int maxPetitionPerday = 0;
+			if(slot.getNoOfWorkday() <= lowWorkDayThreshold) {
+				maxPetitionPerday = maxPetitionPerdayLow;
+			} else {
+				maxPetitionPerday = maxPetitionPerdayHigh;
+			}
 			if(numCount < maxPetitionPerday) {
 				//slot.setAvailability(maxPetitionPerday - numCount);
 				slot.setAvailability(1);
 			} else {
-				slot.setAvailability(0);
+//				slot.setAvailability(0);
+				continue;
 			}
 			slotList.add(slot);
 		}
