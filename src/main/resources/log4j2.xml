@@ -16,7 +16,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.konkow.framework" additivity="false" level="info">
+        <Logger name="com.nananetta.framework" additivity="false" level="info">
             <AppenderRef ref="console" />
             <AppenderRef ref="file-appender" />
         </Logger>

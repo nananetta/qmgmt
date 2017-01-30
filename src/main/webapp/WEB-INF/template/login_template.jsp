@@ -8,7 +8,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<title>_webtemplate_</title>
+<title>MWA Queue Management</title>
 <link rel="stylesheet" href="${context}/resources/styles/bootstrap.css" />
 <script type="text/javascript" src="${context}/resources/scripts/jquery-2.1.3.js"></script>
 <script type="text/javascript" src="${context}/resources/scripts/bootstrap.min.js"></script>
@@ -21,7 +21,7 @@
 		<tiles:insertAttribute name="body"></tiles:insertAttribute>
 	</div>
 	<div class="col-md-offset-6">
-		<p style="color: white">__Release 1.0.0 - 2017-01-29T04:47:58Z__</p>
+		<p style="color: white">__Release 1.0.0 - 2017-01-30T16:22:01Z__</p>
 	</div>
 </body>
 </html>

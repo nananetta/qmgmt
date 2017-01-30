@@ -20,8 +20,6 @@ app.run(configureDefaults);
     ngTableDefaults.settings.counts = [];
   };
   
-
-  
   
 app.controller('QViewerCtrl', function ($scope, $mdDialog, qsearch, NgTableParams, branchFactory, weekFactory) {
 	var self = this;

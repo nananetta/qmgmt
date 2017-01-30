@@ -29,6 +29,7 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 	self.result = [];
 	self.branches = [];
 	self.branchId = undefined;
+	self.branchText = undefined;
 	self.reservedWeek = undefined;
 	
 	branchFactory.get().$promise.then(function(result) {
@@ -38,6 +39,10 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 	});
 
 	self.selectBranch = function() {
+		self.reloadDashboard();
+	}
+	
+	self.reloadDashboard = function() {
 		qmgr.post({branchId: self.branchId}).$promise.then(function(result) {
 			self.result = result.list.map(function(item){
 				item.status = item.availability>0?"ว่าง":"เต็ม";
@@ -46,6 +51,7 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 				var code = self.branches[self.branchId - 1].code;
 				var text = self.branches[self.branchId - 1].description;
 				item.branchText = code + " - "+ text;
+				self.branchText = item.branchText;
 				return item;
 		    });
 
@@ -54,7 +60,7 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 		});
 	}
 	
-	self.showInputDialog = function(ev, branchId, weekId) {
+	self.showInputDialog = function(ev, branchId, weekId, weekText) {
 	    $mdDialog.show({
 	      controller: DialogController,
 	      controllerAs: 'dc',
@@ -65,26 +71,30 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 	      locals: {
 	    	  branchId: branchId,
 	    	  branches: self.branches,
-	    	  reservedWeek: weekId
+	    	  reservedWeek: weekId,
+	    	  branchText: self.branchText,
+	    	  reservedWeekText: weekText
 	      },
 	      fullscreen: true // Only for -xs, -sm breakpoints.
 	    })
 	    .then(function(result) {
-	      console.log("result");
+	      console.log("refresh");
+	      self.reloadDashboard();
 	    }, function() {
 	      console.log("cancel");
 	    });
 	  };
 
 
-	  function DialogController($scope, $mdDialog, $mdToast, branchId, branches, reservedWeek, pFactory) {
+	  function DialogController($scope, $mdDialog, $mdToast, branchId, branches, reservedWeek, pFactory, branchText, reservedWeekText) {
 		var self = this;
 		self.branchId = branchId;
 		self.branches = branches;
 		self.reservedWeek = reservedWeek;
 		self.accountNo = undefined;
 		self.petitionNo = undefined;
-		  
+		self.branchText = branchText;
+		self.reservedWeekText = reservedWeekText;
 	    self.hide = function() {
 	      $mdDialog.hide();
 	    };
@@ -93,7 +103,7 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 	      $mdDialog.cancel();
 	    };
 
-	    self.answer = function() {
+	    self.answer = function(ev) {
 	    	
 	    	if(self.accountNo == undefined || self.petitionNo == undefined) {
 	    		$mdDialog.show(
@@ -122,7 +132,18 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
     			    );
 
 			}, function(error) {
-				console.log("error saving petition "+error);
+				
+				console.log(error);
+				$mdDialog.hide(self);
+				$mdDialog.show(
+	    	    	      $mdDialog.alert()
+	    	    	        .parent(angular.element(document.querySelector('#popupContainer')))
+	    	    	        .clickOutsideToClose(true)
+	    	    	        .title(error.data.errorCode)
+	    	    	        .textContent(error.data.errorMessage)
+	    	    	        .ok('ปิด')
+	    	    	        .targetEvent(ev)
+	    	    	    );
 			});
 	    };
 	  }

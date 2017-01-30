@@ -3,7 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field">
-	<class name="com.konkow.framework.domain.ume.User" table="UME_M_USER">
+	<class name="com.nananetta.framework.domain.ume.User" table="UME_M_USER">
 		
 		<id name="id" type="long">
 			<column name="ID" />
@@ -15,7 +15,7 @@
 			<key>
 				<column name="USER_ID" />
 			</key>
- 			<many-to-many entity-name="com.konkow.framework.domain.ume.Role" not-found="ignore"  >
+ 			<many-to-many entity-name="com.nananetta.framework.domain.ume.Role" not-found="ignore"  >
 			    <column name="ROLE_ID" />
 			</many-to-many>
 		</set>

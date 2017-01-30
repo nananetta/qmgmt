@@ -3,8 +3,8 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field">
-	<class name="com.konkow.framework.domain.ClassicError" table="STD_M_Error" lazy="false" mutable="false">
-		<cache usage="read-only" region="com.konkow.framework.domain.ClassicError"/>
+	<class name="com.nananetta.framework.domain.ClassicError" table="STD_M_Error" lazy="false" mutable="false">
+		<cache usage="read-only" region="com.nananetta.framework.domain.ClassicError"/>
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="native" />

@@ -14,7 +14,7 @@
 	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
 	<!-- Scan for all of Spring components such as Spring Service -->
-	<context:component-scan base-package="com.konkow.framework" />
+	<context:component-scan base-package="com.nananetta.framework" />
 
 	<!-- View -->
 	<mvc:view-controller path="/" view-name="index" />
@@ -39,7 +39,7 @@
 			<bean
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="objectMapper">
-					<bean class="com.konkow.framework.domain.HibernateAwareObjectMapper" />
+					<bean class="com.nananetta.framework.domain.HibernateAwareObjectMapper" />
 				</property>
 			</bean>
 		</mvc:message-converters>
@@ -129,7 +129,7 @@
 
 	<bean id="rememberMeAuthenticationProvider"
 		class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
-		<property name="key" value="metis" />
+		<property name="key" value="me" />
 	</bean>
 
 	<bean id="multipartResolver"
@@ -138,7 +138,7 @@
 		<property name="maxUploadSize" value="268435456" /> <!-- 256 megs -->
 	</bean>
 
-	<bean id="authorizationFilterBean" class="com.konkow.framework.web.view.filter.AuthorizationFilter">
+	<bean id="authorizationFilterBean" class="com.nananetta.framework.web.view.filter.AuthorizationFilter">
 	</bean>
 
 	<bean

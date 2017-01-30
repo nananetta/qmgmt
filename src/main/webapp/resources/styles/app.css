@@ -25,27 +25,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	line-height: 1.1;
 }
 
-.toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
-  color: white; }
-
-.toolbardemoBasicUsage  md-list-item {
-	height: 82px;
-}
-
-#refdata-control {
-	height: 92px;
-    padding-left: 20px;
-    padding-top: 14px;
-}
-
-#refdata-control md-input-container {
-	margin-bottom: 0px;
-}
-
-#search-button {
-    margin-top: -5px;
-}
-
-#namespace input {
-	width: 700px
+@media print {
+	#qmgr-div {
+		display: none !important;
+	}
+	
+	#logout-div {
+		display: none !important;
+	}
+	#find-div {
+		display: none !important;
+	}
 }

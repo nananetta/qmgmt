@@ -3,18 +3,18 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field">
-	<class name="com.konkow.framework.domain.master.Petition" table="MWA_M_PETITION" lazy="false" mutable="false">
-		<cache usage="read-only" region="com.konkow.framework.domain.master.Petition"/>
+	<class name="com.nananetta.framework.domain.master.Petition" table="MWA_M_PETITION" lazy="false" mutable="false">
+		<cache usage="read-only" region="com.nananetta.framework.domain.master.Petition"/>
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="increment" />
 		</id>
 		<version name="rowVersion" column="ROW_VERSION" />
 
-		<many-to-one name="branch" class="com.konkow.framework.domain.master.Branch" fetch="join">
+		<many-to-one name="branch" class="com.nananetta.framework.domain.master.Branch" fetch="join">
             <column name="BRANCH_ID" not-null="true" />
         </many-to-one>
-		<many-to-one name="week" class="com.konkow.framework.domain.master.Week" fetch="join">
+		<many-to-one name="week" class="com.nananetta.framework.domain.master.Week" fetch="join">
             <column name="WEEK_ID" not-null="true" />
         </many-to-one>
         

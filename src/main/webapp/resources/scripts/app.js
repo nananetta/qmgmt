@@ -55,39 +55,6 @@ app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   }])
 
 
-app.controller('HomeCtrl', function ($scope) {});
-
-app.config(function($routeProvider) {
-
-  $routeProvider
-    .when('/Audit Log', {
-      templateUrl: 'auditlog.html',
-      controller: 'AuditLogCtrl'
-    })
-    .when('/Configuration', {
-      templateUrl: 'configuration.html',
-      controller: 'ConfigurationCtrl'
-    })
-    .when('/Reference Data', {
-      templateUrl: 'referencedata.html',
-      controller: 'ReferenceDataCtrl'
-    })
-    .when('/Service Dependency', {
-      templateUrl: 'dependency.html',
-      controller: 'DependencyCtrl'
-    })
-    .otherwise({
-      templateUrl: 'home.html',
-      controller: 'HomeCtrl'
-    });
-  // configure html5 to get links working on jsfiddle  
-//  $locationProvider.html5Mode({
-//    enabled: true,
-//    requireBase: false
-//  });
-
-});
-
 app.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('docs-dark', 'default')
 	.primaryPalette('yellow')

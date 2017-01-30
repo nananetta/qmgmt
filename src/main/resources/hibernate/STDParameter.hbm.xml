@@ -3,8 +3,8 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field">
-	<class name="com.konkow.framework.domain.master.Parameter" table="FMW_M_PARAMETER" lazy="false" mutable="false">
-		<cache usage="read-only" region="com.konkow.framework.domain.master.Parameter"/>
+	<class name="com.nananetta.framework.domain.master.Parameter" table="FMW_M_PARAMETER" lazy="false" mutable="false">
+		<cache usage="read-only" region="com.nananetta.framework.domain.master.Parameter"/>
 		<id name="id" type="int">
 			<column name="ID" />
 			<generator class="native" />

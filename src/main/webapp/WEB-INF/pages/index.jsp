@@ -37,12 +37,12 @@
 					<span>ระบบจัดการคิวบริการหาท่อรั่ว</span>
 				</h2>
 				<span flex=""></span>
-				<md-button ng-href="${context}/logout">ออกจากระบบ</md-button>
+				<div id="logout-div"><md-button ng-href="${context}/logout">ออกจากระบบ</md-button></div>
 			</div>
 			</md-toolbar> 
 		</md-content>
 						
-		<md-content class="md-padding" layout="row" ng-controller="QManagerCtrl as qmgr" >
+		<md-content id="qmgr-div" class="md-padding" layout="row" ng-controller="QManagerCtrl as qmgr" >
 						<script type="text/ng-template" id="inputDialog.tmpl.html">
 <md-dialog>
 
@@ -75,7 +75,13 @@
 								<div layout-gt-sm="row">
 									<md-input-container class="md-block">
 										<label>ช่วงเวลาที่นัด</label> 
-										<input ng-model="dc.reservedWeek">
+										<input ng-model="dc.reservedWeekText" disabled>
+									</md-input-container>
+								</div>
+								<div layout-gt-sm="row">
+									<md-input-container class="md-block">
+										<label>สาขา</label> 
+										<input ng-model="dc.branchText" disabled>
 									</md-input-container>
 								</div>
 							</form>
@@ -119,7 +125,7 @@
 						    <div class="md-media-sm card-media">{{card.status}}</div>
 						</md-card-title>
 						<md-card-actions layout="row" layout-align="end center">
-						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event, card.branchId, card.weekId)">จองคิว</md-button>
+						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event, card.branchId, card.weekId, card.weekText)">จองคิว</md-button>
 						</md-card-actions>
 					</md-card>
 			    </div>
@@ -154,7 +160,7 @@
 								</md-select>
 							</md-input-container>
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="find-div">
 							<md-button id="search-button" class="md-raised md-primary" ng-click="allq.search($event)">ค้นหา</md-button>
 						</div>
 					</form>
