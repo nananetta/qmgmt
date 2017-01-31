@@ -31,20 +31,20 @@ app.controller('AppCtrl', function($scope, $timeout, $mdSidenav, $log, $location
  
 });
 
-app.service('qService', function() {
-	  var qList = [];
+app.service('qRoleService', function() {
+	  var branchRole = undefined;
 
-	  var addQ = function(newObj) {
-	      qList.push(newObj);
+	  var setRole = function(newObj) {
+		  branchRole = newObj;
 	  };
 
-	  var getQ = function(){
-	      return qList;
+	  var getRole = function(){
+	      return branchRole;
 	  };
 
 	  return {
-	    addQ: addQt,
-	    getQ: getQ
+	    setRole: setRole,
+	    getRole: getRole
 	  };
 
 	});

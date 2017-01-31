@@ -37,7 +37,10 @@
 					<span>ระบบจัดการคิวบริการหาท่อรั่ว</span>
 				</h2>
 				<span flex=""></span>
-				<div id="logout-div"><md-button ng-href="${context}/logout">ออกจากระบบ</md-button></div>
+				<div id="logout-div">
+					<span class="loginAs">ชื่อผู้ใช้: {{sess.userName}}</span>
+					<md-button class="md-raised" ng-href="${context}/logout">ออกจากระบบ</md-button>
+				</div>
 			</div>
 			</md-toolbar> 
 		</md-content>
@@ -116,7 +119,9 @@
 					</md-input-container>
 				</div>
 				<div layout="row" layout-xs="column">
-					<md-card flex-gt-sm="25" ng-repeat="card in qmgr.result" >
+					<ul>
+					<li ng-repeat="card in qmgr.result" >
+					<md-card>
 						<md-card-title>
 						  <md-card-title-text>
 						    <span class="md-headline">{{card.weekText}}</span>
@@ -128,6 +133,8 @@
 						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event, card.branchId, card.weekId, card.weekText)">จองคิว</md-button>
 						</md-card-actions>
 					</md-card>
+					</li>
+					</ul>
 			    </div>
 
 			</whiteframe>

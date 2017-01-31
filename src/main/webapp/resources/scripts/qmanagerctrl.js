@@ -24,11 +24,11 @@ app.factory('pFactory', [ '$resource', function($resource) {
         });
     } ])
 
-app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, branchFactory, pFactory) {
+app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, branchFactory, pFactory, qRoleService) {
 	var self = this;
 	self.result = [];
 	self.branches = [];
-	self.branchId = undefined;
+	self.branchId = qRoleService.getRole();
 	self.branchText = undefined;
 	self.reservedWeek = undefined;
 	
@@ -104,7 +104,6 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 	    };
 
 	    self.answer = function(ev) {
-	    	
 	    	if(self.accountNo == undefined || self.petitionNo == undefined) {
 	    		$mdDialog.show(
 	    	    	      $mdDialog.alert()

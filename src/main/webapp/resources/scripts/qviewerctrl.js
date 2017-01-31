@@ -21,12 +21,12 @@ app.run(configureDefaults);
   };
   
   
-app.controller('QViewerCtrl', function ($scope, $mdDialog, qsearch, NgTableParams, branchFactory, weekFactory) {
+app.controller('QViewerCtrl', function ($scope, $mdDialog, qsearch, NgTableParams, branchFactory, weekFactory, qRoleService) {
 	var self = this;
 	self.result = [];
 	self.weeks = [];
 	self.branches = [];
-	self.branchId = undefined;
+	self.branchId = qRoleService.getRole();
 	self.weekId = undefined;
     self.tableParams = new NgTableParams({}, {
     	dataset: this.result

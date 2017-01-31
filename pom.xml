@@ -305,20 +305,6 @@
             <version>0.9.5.2</version>
         </dependency>
 
-        <!-- MS SQL Server driver -->
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>sqljdbc4</artifactId>
-            <version>4.0</version>
-        </dependency>
-
-        <!-- Oracle DB driver -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0</version>
-        </dependency>
-
         <!-- HSQLDB -->
         <dependency>
             <groupId>org.hsqldb</groupId>
