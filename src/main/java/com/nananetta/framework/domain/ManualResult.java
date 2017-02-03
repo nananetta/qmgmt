@@ -15,11 +15,12 @@ public class ManualResult<E> implements Result<E> {
 
     private List<E> list;
 
-    private int pageSize = Integer.parseInt(FrameworkProperties.getDefaultPageSize());
+    private int pageSize;
 
-    public ManualResult(List<E> list) {
+    public ManualResult(List<E> list, int pageSize) {
     	this.list = list;
     	this.total = list.size();
+    	this.pageSize = pageSize;
     }
 
     @JsonIgnore
@@ -36,16 +37,7 @@ public class ManualResult<E> implements Result<E> {
     }
 
     public Page<E> getPage(Integer page, Integer pageSize) {
-        page = page < 1 ? 1 : page;
-        int startIndex = (page - 1) * pageSize; // Start from 0
-        int noOfPage = (int) Math.ceil((double) (total) / pageSize);
-
-        Page<E> resultPage = new Page<E>(list);
-        resultPage.setStartIndex(startIndex);
-        resultPage.setPage(page);
-        resultPage.setTotal(total);
-        resultPage.setTotalPage(noOfPage);
-        return resultPage;
+        return null;
     }
     
     public Page<E> getPage(int page) {

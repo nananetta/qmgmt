@@ -78,13 +78,13 @@
 								<div layout-gt-sm="row">
 									<md-input-container class="md-block">
 										<label>ช่วงเวลาที่นัด</label> 
-										<input ng-model="dc.reservedWeekText" disabled>
+										<input ng-model="dc.reservedWeekText" class="dialogTextInput" disabled>
 									</md-input-container>
 								</div>
 								<div layout-gt-sm="row">
 									<md-input-container class="md-block">
 										<label>สาขา</label> 
-										<input ng-model="dc.branchText" disabled>
+										<input ng-model="dc.branchText" class="dialogTextInput" disabled>
 									</md-input-container>
 								</div>
 							</form>
@@ -110,13 +110,15 @@
 					</div>
 				</md-toolbar>
 				<div layout="row">
-					<md-input-container>
-						<label>สาขา</label>
-						<md-select ng-model="qmgr.branchId" ng-change="qmgr.selectBranch()">
-							<md-option ng-repeat="branch in qmgr.branches" value="{{branch.id}}">
-								{{branch.code}} - {{branch.description}} </md-option>
-						</md-select>
-					</md-input-container>
+					<div class="form-group">
+						<md-input-container>
+							<label>สาขา</label>
+							<md-select ng-model="qmgr.branchId" ng-change="qmgr.selectBranch()">
+								<md-option ng-repeat="branch in qmgr.branches" value="{{branch.id}}">
+									{{branch.code}} - {{branch.description}} </md-option>
+							</md-select>
+						</md-input-container>
+					</div>
 				</div>
 				<div layout="row" layout-xs="column">
 					<ul>
@@ -127,14 +129,17 @@
 						    <span class="md-headline">{{card.weekText}}</span>
 						    <span class="md-subhead">{{card.branchText}}</span>
 						  </md-card-title-text>
-						    <div class="md-media-sm card-media">{{card.status}}</div>
+						 <span class="md-media-sm card-media">{{card.status}}</span>
 						</md-card-title>
 						<md-card-actions layout="row" layout-align="end center">
-						  <md-button class="md-raised" ng-click="qmgr.showInputDialog($event, card.branchId, card.weekId, card.weekText)">จองคิว</md-button>
+			    			<md-button class="md-raised" ng-click="qmgr.showInputDialog($event, card.branchId, card.weekId, card.weekText)">จองคิว</md-button>
 						</md-card-actions>
 					</md-card>
 					</li>
 					</ul>
+			    </div>
+			    <div layout="row" id="viewmore" ng-if="qmgr.isBranchSelected == true">
+					<md-button id="viewmore-button" class="md-primary" ng-click="qmgr.loadMore()">ดูเพิ่ม</md-button>
 			    </div>
 
 			</whiteframe>

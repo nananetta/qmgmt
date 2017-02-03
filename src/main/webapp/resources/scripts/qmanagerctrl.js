@@ -31,6 +31,8 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 	self.branchId = qRoleService.getRole();
 	self.branchText = undefined;
 	self.reservedWeek = undefined;
+	self.currPage = 1;
+	self.isBranchSelected = false;
 	
 	branchFactory.get().$promise.then(function(result) {
 		self.branches = result.list;
@@ -39,11 +41,22 @@ app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, bran
 	});
 
 	self.selectBranch = function() {
+		self.currPage = 1;
+		self.isBranchSelected = true;
 		self.reloadDashboard();
 	}
 	
+	self.loadMore = function() {
+		if(self.currPage < 3) {
+			self.currPage++;
+			self.reloadDashboard();
+		} else {
+			angular.element().find();
+		}
+	}
+	
 	self.reloadDashboard = function() {
-		qmgr.post({branchId: self.branchId}).$promise.then(function(result) {
+		qmgr.post({branchId: self.branchId, page: self.currPage}).$promise.then(function(result) {
 			self.result = result.list.map(function(item){
 				item.status = item.availability>0?"ว่าง":"เต็ม";
 				item.status.labelclass = item.availability?"label label-success":"label label-warning";

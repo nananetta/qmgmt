@@ -34,5 +34,12 @@ public class WeekController {
 		Result<Week> result = wRepository.findAll();
 		return result.buildResult();
 	}
+	
+	@RequestMapping(value = "/getCurrentWeek", method = RequestMethod.GET)
+	@Transactional
+	public @ResponseBody Week getCurrentWeek() {
+		Week result = wRepository.findCurrentWeek();
+		return result;
+	}
 
 }

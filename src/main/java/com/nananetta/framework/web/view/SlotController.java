@@ -56,8 +56,8 @@ public class SlotController {
 
 		List<Slot> result = sRepository.findAvailableWeekByBranchId(query.getBranchId(), query.getPage(), pageSize,
 				petitionPerdayLow, petitionPerdayHigh, lowWorkDayThreshold);
-		
-		return new ManualResult<Slot>(result).buildResult();
+
+		return new ManualResult<Slot>(result, pageSize).buildResult();
 	}
 
 }

@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	line-height: 1.1;
 }
 
+.form-group {
+    padding: 10px 5px 0px 5px;
+}
+
 .loginAs {
 	font-weight: 500;
     font-size: 14px;
@@ -50,8 +54,34 @@ li md-card {
     display: block;
     padding: 10px;
     text-decoration: none;
-    width: 300px;
-    height: 200px;
+    width: 420px;
+    height: 150px;
+}
+
+li md-card md-card-title {
+	padding: 12px !important;
+}
+
+li md-card md-card-title span {
+	font-size: 20px !important;
+}
+
+li md-card md-card-title .md-media-sm {
+	background-color: #99fa88;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+li md-card md-card-title .md-subhead {
+	font-size: 16px !important;
+}
+
+#viewmore-button {
+	width: 100%;
+}
+
+.dialogTextInput {
+	width: 270px !important;
 }
 
 @media print {

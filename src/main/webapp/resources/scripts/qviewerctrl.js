@@ -21,7 +21,7 @@ app.run(configureDefaults);
   };
   
   
-app.controller('QViewerCtrl', function ($scope, $mdDialog, qsearch, NgTableParams, branchFactory, weekFactory, qRoleService) {
+app.controller('QViewerCtrl', function ($scope, $mdDialog, $mdToast, qsearch, NgTableParams, branchFactory, weekFactory, currWeekFactory, qRoleService) {
 	var self = this;
 	self.result = [];
 	self.weeks = [];
@@ -43,6 +43,14 @@ app.controller('QViewerCtrl', function ($scope, $mdDialog, qsearch, NgTableParam
 	}, function(error) {
 		console.log("error getting weekFactory");
 	});
+    
+    currWeekFactory.get().$promise.then(function(result) {
+    	if(result!=undefined) {
+        	self.weekId = result.id;
+    	}
+	}, function(error) {
+		console.log("error getting currWeekFactory");
+	});
 
     
     self.search = function(ev) {
@@ -59,6 +67,12 @@ app.controller('QViewerCtrl', function ($scope, $mdDialog, qsearch, NgTableParam
       	  return;
     	};
     	qsearch.post({weekId: self.weekId, branchId: self.branchId}).$promise.then(function(result) {
+    		if(result!=undefined && result.list!=undefined && result.list.length == 0) {
+  	    	  $mdToast.show($mdToast.simple()
+      			        .textContent('ไม่พบข้อมูล')
+      			        .hideDelay(2000)
+      			    );
+    		}
         	self.result = result.list;
     		$scope.tableParams = new NgTableParams({}, { dataset:self.result  });
     		

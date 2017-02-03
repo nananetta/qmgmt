@@ -26,6 +26,18 @@ app.factory('weekFactory', [ '$resource', function($resource) {
     });
 } ]);
 
+app.factory('currWeekFactory', [ '$resource', function($resource) {
+    return $resource('/qmgmt/week/getCurrentWeek', {}, {
+	get : {
+	    method : 'GET',
+	    headers : {
+		'Accept' : 'application/json',
+		'Content-Type' : 'application/json'
+	    }
+	}
+    });
+} ]);
+
 app.controller('AppCtrl', function($scope, $timeout, $mdSidenav, $log, $location) {
 
  

@@ -13,5 +13,7 @@ public interface IWeekRepository extends Repository<Week, Integer> {
 	public Week store(Week entity) throws BusinessSQLException;
 	
 	void remove(Integer key) throws BusinessSQLException;
-	
+
+	public Week findCurrentWeek(); 
+
 }
