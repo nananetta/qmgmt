@@ -21,12 +21,20 @@ app.run(configureDefaults);
   };
   
   
-app.controller('QViewerCtrl', function ($scope, $mdDialog, $mdToast, qsearch, NgTableParams, branchFactory, weekFactory, currWeekFactory, qRoleService) {
+app.controller('QViewerCtrl', function ($scope, $mdDialog, $mdToast, qsearch, NgTableParams, branchFactory, weekFactory, currWeekFactory) {
 	var self = this;
 	self.result = [];
 	self.weeks = [];
 	self.branches = [];
-	self.branchId = qRoleService.getRole();
+	self.branchId = undefined;
+	
+	$scope.$on('roleCode', function(event, msg) {
+	    self.branchId = msg;
+	    if(msg!=undefined) {
+		    self.branchAcct = true;
+	    }
+	  });
+	
 	self.weekId = undefined;
     self.tableParams = new NgTableParams({}, {
     	dataset: this.result

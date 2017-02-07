@@ -113,7 +113,7 @@
 					<div class="form-group">
 						<md-input-container>
 							<label>สาขา</label>
-							<md-select ng-model="qmgr.branchId" ng-change="qmgr.selectBranch()">
+							<md-select ng-model="qmgr.branchId" ng-disabled="qmgr.branchAcct" ng-change="qmgr.selectBranch()">
 								<md-option ng-repeat="branch in qmgr.branches" value="{{branch.id}}">
 									{{branch.code}} - {{branch.description}} </md-option>
 							</md-select>
@@ -159,7 +159,7 @@
 						<div class="form-group">
 							<md-input-container>
 								<label>สาขา</label>
-								<md-select ng-model="allq.branchId">
+								<md-select ng-model="allq.branchId" ng-disabled="allq.branchAcct">
 									<md-option ng-repeat="branch in allq.branches" value="{{branch.id}}">
 										{{branch.code}} - {{branch.description}} </md-option>
 								</md-select>

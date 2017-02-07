@@ -26,7 +26,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependency Versions -->
-        <spring.version>4.1.5.RELEASE</spring.version>
+        <spring.version>4.3.5.RELEASE</spring.version>
         <spring.security.version>3.2.6.RELEASE</spring.security.version>
         <spring.data.version>1.7.2.RELEASE</spring.data.version>
         <inject.version>1</inject.version>

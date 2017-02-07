@@ -43,24 +43,6 @@ app.controller('AppCtrl', function($scope, $timeout, $mdSidenav, $log, $location
  
 });
 
-app.service('qRoleService', function() {
-	  var branchRole = undefined;
-
-	  var setRole = function(newObj) {
-		  branchRole = newObj;
-	  };
-
-	  var getRole = function(){
-	      return branchRole;
-	  };
-
-	  return {
-	    setRole: setRole,
-	    getRole: getRole
-	  };
-
-	});
-
 app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
     cfpLoadingBarProvider.includeBar = true;

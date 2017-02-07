@@ -13,7 +13,7 @@ app.factory('sessionFactory', [ '$resource', function($resource) {
 } ])
 
 
-app.controller('SessionCtrl', function ($scope, sessionFactory, qRoleService) {
+app.controller('SessionCtrl', function ($scope, sessionFactory, $rootScope) {
 	var self = this;
 	self.roleId = undefined;
 	self.roleCode = undefined;
@@ -25,7 +25,7 @@ app.controller('SessionCtrl', function ($scope, sessionFactory, qRoleService) {
 			if(roles != undefined) {
 		    	self.roleId = roles[0].id;
 		    	self.roleCode = roles[0].roleCode;
-		    	qRoleService.setRole(self.roleCode);
+		    	$rootScope.$broadcast('roleCode', self.roleCode);
 			}
 		}, function(error) {
 			console.log("error getting roleFactory");

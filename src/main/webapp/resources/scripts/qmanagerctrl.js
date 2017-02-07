@@ -24,11 +24,19 @@ app.factory('pFactory', [ '$resource', function($resource) {
         });
     } ])
 
-app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, branchFactory, pFactory, qRoleService) {
+app.controller('QManagerCtrl', function ($scope, $mdDialog, $mdToast, qmgr, branchFactory, pFactory) {
 	var self = this;
 	self.result = [];
 	self.branches = [];
-	self.branchId = qRoleService.getRole();
+	self.branchId = undefined;
+	$scope.$on('roleCode', function(event, msg) {
+		self.branchId = msg;
+	    if(msg!=undefined) {
+		    self.branchAcct = true;
+			self.reloadDashboard();
+	    }
+	  });
+	
 	self.branchText = undefined;
 	self.reservedWeek = undefined;
 	self.currPage = 1;
