@@ -25,7 +25,9 @@ app.controller('SessionCtrl', function ($scope, sessionFactory, $rootScope) {
 			if(roles != undefined) {
 		    	self.roleId = roles[0].id;
 		    	self.roleCode = roles[0].roleCode;
-		    	$rootScope.$broadcast('roleCode', self.roleCode);
+		    	if(self.roleCode!=undefined && self.roleCode != '0') {
+		    		$rootScope.$broadcast('roleCode', self.roleCode);
+		    	}
 			}
 		}, function(error) {
 			console.log("error getting roleFactory");
