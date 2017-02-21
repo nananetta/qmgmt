@@ -24,6 +24,7 @@ import com.nananetta.framework.web.view.WeekController;
 public class WeekRepository extends AbstractRepository<Week, Integer> implements IWeekRepository {
 
 	private static final Logger LOGGER = LogManager.getLogger(WeekRepository.class);
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 

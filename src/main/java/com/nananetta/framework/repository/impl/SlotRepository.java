@@ -3,6 +3,8 @@ package com.nananetta.framework.repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +19,8 @@ import com.nananetta.framework.repository.ISlotRepository;
 @Component
 public class SlotRepository implements ISlotRepository {
 
+	private static final Logger LOGGER = LogManager.getLogger(SlotRepository.class);
+	
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -34,10 +38,10 @@ public class SlotRepository implements ISlotRepository {
 			page = 1;
 		}
 		
-		Query query = getSession().createSQLQuery("SELECT TOP ? w.ID, w.WEEK_TEXT, w.NO_OF_WORKDAY, CASE WHEN p.NUM_COUNT IS NOT NULL THEN p.NUM_COUNT ELSE 0 END AS NUM_COUNT "
+		Query query = getSession().createSQLQuery("SELECT w.ID, w.WEEK_TEXT, w.NO_OF_WORKDAY, CASE WHEN p.NUM_COUNT IS NOT NULL THEN p.NUM_COUNT ELSE 0 END AS NUM_COUNT "
 				+ " FROM MWA_M_WEEK AS w "
 				+ " LEFT OUTER JOIN ( SELECT count(pe.ID) AS NUM_COUNT, pe.WEEK_ID FROM MWA_M_PETITION AS pe WHERE pe.BRANCH_ID = ? GROUP BY pe.WEEK_ID) AS p ON w.ID = p.WEEK_ID"
-				+ " WHERE CURRENT_DATE < w.END_DATE")
+				+ " WHERE CURRENT_DATE < w.END_DATE LIMIT ?")
 				.addScalar("ID", IntegerType.INSTANCE)
 				.addScalar("WEEK_TEXT", StringType.INSTANCE)
 				.addScalar("NO_OF_WORKDAY", IntegerType.INSTANCE)
@@ -49,8 +53,8 @@ public class SlotRepository implements ISlotRepository {
         
         int noOfRow =  page * pageSize;
 		List<Slot> slotList = new ArrayList<Slot>();
-		query.setParameter(0, noOfRow);
-		query.setParameter(1, branchId);
+		query.setParameter(0, branchId);
+		query.setParameter(1, noOfRow);
 		List<Object[]> rows = query.list();
 		for(Object[] row : rows){
 			Slot slot = new Slot();

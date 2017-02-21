@@ -97,7 +97,7 @@
 
 	<!-- Define SessionFactory bean -->
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:/hibernate/hibernate.cfg.xml" />
 		<property name="hibernateProperties">
@@ -109,13 +109,13 @@
 				<prop key="hibernate.cache.use_query_cache">true</prop>
 				<prop key="hibernate.dialect">${db.hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.default_schema">PUBLIC</prop>
+				<prop key="hibernate.default_schema"></prop>
 			</props>
 		</property>
 	</bean>
 	<!-- Transaction Manager is defined -->
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
