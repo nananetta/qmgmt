@@ -85,6 +85,15 @@ public class PetitionController {
     	Result<Petition> presult = pRepository.findByQuery(pQuery);
     	long size = presult.buildResult().getTotal();
     	
+    	// Check duplicate accountNo in the week
+    	pQuery.setAccountNo(petition.getAccountNo());
+    	Result<Petition> pdupresult = pRepository.findByQuery(pQuery);
+    	long duplicateNumSize = pdupresult.buildResult().getTotal();
+    	if(duplicateNumSize > 0) {
+			LOGGER.error("เลขทะเบียนผู้ใช้น้ำซ้ำกันภายในสัปดาห์");
+			throw new BusinessException("ERR-002", "เลขทะเบียนผู้ใช้น้ำซ้ำกันภายในสัปดาห์");
+    	}
+    	
 		Parameter petitionNumLowParam = pmRepository.findByCode("MAX_PETITION_PER_DAY_LOW");
 		Integer maxPetitionPerdayLow = Integer.parseInt(petitionNumLowParam.getValue());
 

@@ -6,6 +6,7 @@ public class PetitionQuery extends AbstractQuery {
 
     private Integer weekId;
     private Integer branchId;
+    private String accountNo;
     
 	public Integer getWeekId() {
 		return weekId;
@@ -19,5 +20,12 @@ public class PetitionQuery extends AbstractQuery {
 	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
 	}
+	public String getAccountNo() {
+		return accountNo;
+	}
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+	
 
 }

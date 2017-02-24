@@ -52,6 +52,9 @@ public class PetitionRepository extends AbstractRepository<Petition, Long> imple
 		if (query.getWeekId() != null) {
 			criteria = criteria.add(Restrictions.eq("week.id", query.getWeekId()));
 		}
+		if (query.getAccountNo() != null) {
+			criteria = criteria.add(Restrictions.eq("accountNo", query.getAccountNo()));
+		}
 		return new HibernateResult<Petition>(sessionFactory, criteria);
 	}
 
