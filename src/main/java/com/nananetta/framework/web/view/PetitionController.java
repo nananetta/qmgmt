@@ -79,19 +79,24 @@ public class PetitionController {
     	petition.setWeek(week);
     	
     	// Check availability
+    	int currentWeekId = petition.getWeek().getId();
     	PetitionQuery pQuery = new PetitionQuery();
     	pQuery.setBranchId(petition.getBranch().getId());
-    	pQuery.setWeekId(petition.getWeek().getId());
+    	pQuery.setWeekId(currentWeekId);
     	Result<Petition> presult = pRepository.findByQuery(pQuery);
     	long size = presult.buildResult().getTotal();
     	
     	// Check duplicate accountNo in the week
+    	pQuery.setWeekId(null);
+    	int period = ProjectProperties.getUniquePetitionWeekPeriod();
+    	pQuery.setWeekStart(currentWeekId - period);
+    	pQuery.setWeekEnd(currentWeekId + period);
     	pQuery.setAccountNo(petition.getAccountNo());
     	Result<Petition> pdupresult = pRepository.findByQuery(pQuery);
     	long duplicateNumSize = pdupresult.buildResult().getTotal();
     	if(duplicateNumSize > 0) {
-			LOGGER.error("เลขทะเบียนผู้ใช้น้ำซ้ำกันภายในสัปดาห์");
-			throw new BusinessException("ERR-002", "เลขทะเบียนผู้ใช้น้ำซ้ำกันภายในสัปดาห์");
+			LOGGER.error("เลขทะเบียนผู้ใช้น้ำซ้ำกันภายในช่วงสัปดาห์ที่กำหนด");
+			throw new BusinessException("ERR-002", "เลขทะเบียนผู้ใช้น้ำซ้ำกันภายในช่วงสัปดาห์ที่กำหนด");
     	}
     	
 		Parameter petitionNumLowParam = pmRepository.findByCode("MAX_PETITION_PER_DAY_LOW");

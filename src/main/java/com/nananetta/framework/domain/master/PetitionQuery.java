@@ -5,6 +5,8 @@ import com.nananetta.framework.domain.AbstractQuery;
 public class PetitionQuery extends AbstractQuery {
 
     private Integer weekId;
+    private Integer weekStart;
+    private Integer weekEnd;
     private Integer branchId;
     private String accountNo;
     
@@ -26,6 +28,19 @@ public class PetitionQuery extends AbstractQuery {
 	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
 	}
+	public Integer getWeekStart() {
+		return weekStart;
+	}
+	public void setWeekStart(Integer weekStart) {
+		this.weekStart = weekStart;
+	}
+	public Integer getWeekEnd() {
+		return weekEnd;
+	}
+	public void setWeekEnd(Integer weekEnd) {
+		this.weekEnd = weekEnd;
+	}
+	
 	
 
 }

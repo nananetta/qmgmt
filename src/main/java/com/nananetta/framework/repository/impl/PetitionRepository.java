@@ -52,6 +52,10 @@ public class PetitionRepository extends AbstractRepository<Petition, Long> imple
 		if (query.getWeekId() != null) {
 			criteria = criteria.add(Restrictions.eq("week.id", query.getWeekId()));
 		}
+		if (query.getWeekStart() != null && query.getWeekEnd() != null) {
+			criteria = criteria.add(Restrictions.ge("week.id", query.getWeekStart()));
+			criteria = criteria.add(Restrictions.le("week.id", query.getWeekEnd()));
+		}
 		if (query.getAccountNo() != null) {
 			criteria = criteria.add(Restrictions.eq("accountNo", query.getAccountNo()));
 		}
