@@ -36,7 +36,7 @@ public class WeekController {
 	}
 	
 	@RequestMapping(value = "/getCurrentWeek", method = RequestMethod.GET)
-	@Transactional
+	@Transactional(readOnly=true)
 	public @ResponseBody Week getCurrentWeek() {
 		Week result = wRepository.findCurrentWeek();
 		return result;
